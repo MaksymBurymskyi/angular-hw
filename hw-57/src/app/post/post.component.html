@@ -1,0 +1,10 @@
+<div class="body">
+  <div class="picture">
+    <img [src]="img" alt="Avatar" />
+  </div>
+  <div class="wrapper">
+    <h2>{{ title }}</h2>
+    <div class="post-text">{{ text.slice(0, 50) }}</div>
+    <button type="button" (click)="removeUser()">remove user</button>
+  </div>
+</div>

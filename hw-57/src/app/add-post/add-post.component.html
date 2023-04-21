@@ -1,0 +1,32 @@
+<div class="body">
+  <input
+    type="text"
+    placeholder="Title"
+    [value]="titleInputValue"
+    (input)="onTitle($event)"
+    #title
+  />
+
+  <textarea
+    type="text"
+    placeholder="Text"
+    [value]="textInputValue"
+    (input)="onText($event)"
+    #text
+  ></textarea>
+
+  <input
+    type="text"
+    placeholder="Avatar URL"
+    [value]="imgInputValue"
+    (input)="onImgUrl($event)"
+    #img
+  />
+
+  <button
+    type="button"
+    (click)="addNewPost(title.value, text.value, img.value)"
+  >
+    Add post
+  </button>
+</div>
