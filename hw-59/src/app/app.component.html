@@ -9,7 +9,7 @@
         ngModel
         #login="ngModel"
         required
-        pattern="[a-zA-Z]+$"
+        pattern="[a-zA-Z0-9]+$"
       />
       <p *ngIf="login.invalid && login.touched && login.errors?.['pattern']">
         Only latin letters are allowed
