@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,27 +9,42 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'home-work';
-  users: any;
-  ischecked: boolean = false;
-  
-  
+  userEmails: any = [];
+  form!: FormGroup;
+
   constructor(private http: HttpClient) {
-    this.http.get('../assets/users.json').subscribe(data => {
-      this.users = data;
+    this.http.get('../assets/users.json').subscribe((data: any = []) => {
+      data.forEach((element: any) => {
+        this.userEmails.push(element.email)
+      });
+      this.ngOnInit();
+    });   
+  }
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      login: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+$')]),
+      email: new FormControl('', [Validators.required, Validators.email],  [this.checkEmail.bind(this)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(7)]),
     });
   }
 
-  submit(form: any) {
-    this.ischecked = false
-    this.users.forEach((user: any) => {
-      if (user.email === form.value.email) {
-        this.ischecked = true;
-      }
+  async checkEmail(control: any): Promise<any> {
+    const emails: any = this.userEmails;
+    return new Promise(resolve => {
+      setTimeout(() => { 
+        if(emails.includes(control.value)){
+          control.markAllAsTouched()
+          resolve({uniqEmail: true})
+        } else {
+          resolve(null)
+        }
+      }, 2000)
     });
-    if (form.valid && !this.ischecked) {
-     console.log(form.value); 
-    } else {
-      form.control.markAllAsTouched()
-    }
+  }
+
+  submit() {
+    this.form.valid && console.log(this.form);
   }
 }
+
