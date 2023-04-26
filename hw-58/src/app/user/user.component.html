@@ -1,26 +1,36 @@
 <div class="wrapper">
-    <div class="body">
-        <div class="picture">
-            <img [src]="img" alt="">
-        </div>
-        <div class="user-data">
-            <div class="user-data-item">
-                <h2>{{name}}</h2>
-                <div class="edit-body">
-                    <input type="text" placeholder="Write new name">
-                    <button class="network">Edit</button>
-                </div>
-            </div>
-            <div class="user-data-item">
-                <div class="status-text">{{status}}</div>
-                <div class="edit-body">
-                    <input type="text" placeholder="Write new status">
-                    <button class="network">Edit</button>
-                </div>
-            </div>
-        </div>
+  <div class="body">
+    <div class="picture">
+      <img [src]="img" alt="" />
     </div>
-<div class="group">
-    <p><b>Group Name:</b><span> Healthy lifestyle</span></p>
-</div>
+    <div class="user-data">
+      <div class="user-data-item">
+        <h2>{{ newName }}</h2>
+        <div class="edit-body">
+          <input
+            type="text"
+            placeholder="Write new name"
+            [(ngModel)]="nameInputValue"
+          />
+          <button class="network" (click)="onEditName()">Edit</button>
+        </div>
+      </div>
+      <div class="user-data-item">
+        <div class="status-text">{{ newStatus }}</div>
+        <div class="edit-body">
+          <input
+            type="text"
+            placeholder="Write new status"
+            [(ngModel)]="statusInputValue"
+          />
+          <button class="network" (click)="onEditStatus()">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="group">
+    <p>
+      <b>Group Name:</b><span>{{ nameGroupService.newNameGroup }}</span>
+    </p>
+  </div>
 </div>

@@ -1,13 +1,15 @@
 <div class="wrapper">
-    <header>
-        <app-header></app-header>
-    </header>
-    <main>
-        <app-user 
-        *ngFor="let user of users"
-        [name]="user.name"
-        [status]="user.status"
-        [img]="user.url"
-        ></app-user>
-    </main>
+  <header>
+    <app-header></app-header>
+  </header>
+  <main>
+    <app-user
+      *ngFor="let user of usersService.users"
+      [name]="user.name"
+      [status]="user.status"
+      [img]="user.url"
+    ></app-user>
+    <button class="popUp" (click)="showPopUp()">Show details</button>
+    <ng-template #popUp></ng-template>
+  </main>
 </div>
